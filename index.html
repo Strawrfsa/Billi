@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billi - New Bybit Mascot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0604 0%, #1a0f0a 50%, #0a0604 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 6, 4, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 140, 0, 0.2);
+            transition: padding 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ffa500;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffb347;
+        }
+
+        .nav-x-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 140, 0, 0.1);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            color: #ffa500;
+        }
+
+        .nav-x-link:hover {
+            background: rgba(255, 140, 0, 0.3);
+            border-color: #ff8c00;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 6rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff8c00, #ffa500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 0.8s ease-out;
+            letter-spacing: -2px;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #ffa500;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-logo {
+            width: 250px;
+            height: 250px;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+            object-fit: contain;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 165, 0, 0.8);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* CA Container */
+        .ca-container {
+            background: rgba(255, 140, 0, 0.05);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .ca-label {
+            font-size: 0.9rem;
+            color: #ffa500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ca-address {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+        }
+
+        .ca-address:hover {
+            background: rgba(255, 140, 0, 0.15);
+            transform: scale(1.02);
+            border-color: rgba(255, 140, 0, 0.5);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #ff8c00;
+            color: #ffa500;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 140, 0, 0.1);
+        }
+
+        /* Chart Section */
+        .chart-section {
+            width: 90%;
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: #ffa500;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        #dexscreener-embed {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            width: 90%;
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 140, 0, 0.6);
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffa500;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 165, 0, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            width: 90%;
+            max-width: 1600px;
+            margin: 6rem auto;
+            padding: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 140, 0, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 140, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Video Section */
+        .video-section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            border-radius: 25px;
+            overflow: hidden;
+            border: 3px solid rgba(255, 140, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.2);
+            transition: all 0.3s;
+            background: #000;
+        }
+
+        .video-wrapper:hover {
+            border-color: rgba(255, 140, 0, 0.8);
+            box-shadow: 0 30px 70px rgba(255, 140, 0, 0.4);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 6rem;
+            border-top: 2px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            color: #ffa500;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: rgba(255, 165, 0, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 140, 0, 0.1);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #ffa500;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 140, 0, 0.3);
+            border-color: #ff8c00;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.5);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 140, 0, 0.2);
+            color: rgba(255, 165, 0, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #000;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .subtitle { font-size: 1.3rem; }
+            .section-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+            #dexscreener-embed { height: 500px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="BILLI Logo" onerror="this.style.display='none'">
+                <span class="logo-text">BILLI 🐱</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chart">Chart</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="https://x.com/i/communities/1982756470799159304" target="_blank" class="nav-x-link" title="Join X Community">𝕏</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="logo.png" alt="BILLI Logo" class="hero-logo" onerror="this.style.display='none'">
+            <h1>BILLI</h1>
+            <p class="subtitle">New Bybit Mascot</p>
+            
+            <div class="ca-container">
+                <div class="ca-label">Contract Address</div>
+                <div class="ca-address" onclick="copyCA()" title="Click to copy">
+                    GuWzzco7egeho9U8nHnPfTKivdMKQqqZmjDUj26Ypump
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://dexscreener.com/solana/GuWzzco7egeho9U8nHnPfTKivdMKQqqZmjDUj26Ypump" target="_blank" class="btn">
+                    📊 View on Dexscreener
+                </a>
+                <button onclick="document.getElementById('chart').scrollIntoView({behavior: 'smooth'})" class="btn btn-secondary">
+                    📈 See Live Chart
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chart Section -->
+    <section class="chart-section" id="chart">
+        <iframe 
+            id="dexscreener-embed" 
+            src="https://dexscreener.com/solana/GuWzzco7egeho9U8nHnPfTKivdMKQqqZmjDUj26Ypump?embed=1&theme=dark">
+        </iframe>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="obrazok1.jpg" alt="Billi 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ff8c00%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 1%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok2.jpg" alt="Billi 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ffa500%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 2%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok3.jpg" alt="Billi 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ff8c00%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 3%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok4.jpg" alt="Billi 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ffa500%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 4%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok5.jpg" alt="Billi 5" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ff8c00%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 5%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok6.jpg" alt="Billi 6" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ffa500%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 6%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok7.jpg" alt="Billi 7" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ff8c00%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 7%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok8.jpg" alt="Billi 8" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ffa500%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 8%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="gallery-item">
+                <img src="obrazok9.jpg" alt="Billi 9" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22%3E%3Crect fill=%22%23ff8c00%22 width=%22350%22 height=%22350%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2228%22 fill=%22%23000%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage 9%3C/text%3E%3C/svg%3E'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <div class="video-wrapper">
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>🐱 BILLI - New Bybit Mascot</h3>
+            <p>Join the community and be part of the revolution!</p>
+            
+            <div class="social-links">
+                <a href="https://x.com/i/communities/1982756470799159304" target="_blank" class="social-link" title="Join our X Community">
+                    𝕏
+                </a>
+            </div>
+
+            <div class="copyright">
+                © 2024 BILLI Memecoin. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ⬆️
+    </button>
+
+    <script>
+        // Copy Contract Address
+        function copyCA() {
+            const ca = 'GuWzzco7egeho9U8nHnPfTKivdMKQqqZmjDUj26Ypump';
+            navigator.clipboard.writeText(ca).then(() => {
+                const btn = document.querySelector('.ca-address');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied to clipboard!';
+                btn.style.background = 'rgba(255, 140, 0, 0.3)';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'rgba(0, 0, 0, 0.5)';
+                }, 2000);
+            });
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/Hide Scroll to Top button
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.getElementById('scrollTop');
+            const navbar = document.getElementById('navbar');
+            
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+                navbar.classList.add('scrolled');
+            } else {
+                scrollTop.classList.remove('visible');
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
